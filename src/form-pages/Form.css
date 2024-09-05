@@ -1,0 +1,51 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    color: blue;
+}
+
+form {
+    font-family: helvetica;
+    border: 1px solid black;
+    width: 30.6rem;
+    padding: 2rem 1rem;
+}
+
+.form-header {
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: bold;
+}
+
+form fieldset {
+    padding: 0;
+    border: none;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+form input, form button{
+    font-size: 1.6rem;
+    width: 100%;
+    padding: 1.2rem;
+}
+
+.forgot-password {
+    font-size: 1.5rem;
+}
+
+.form-footer {
+    text-align: center;
+}

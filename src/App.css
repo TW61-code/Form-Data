@@ -1,0 +1,12 @@
+html {
+  /* 
+    The 62.5% trick ensures that developers can easily 
+    scale values without worrying about the type of 
+    device used to view the content.
+  */
+  font-size: 62.5%;
+}
+
+body {
+  height: 100vh;
+}
