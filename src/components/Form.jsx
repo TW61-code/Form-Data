@@ -7,8 +7,8 @@ function Form(
         type1, 
         type2, 
         page,
-        setEmail,
-        email,
+        setSignUpEmail,
+        signUpEmail,
         confirmPasswordPlaceholder,
         setNewPassword,
         newPassword,
@@ -36,13 +36,13 @@ function Form(
         <form className={`${page}-form`} onSubmit={onHandleSubmitForm}>
             <h3 className='form-header'>{page === 'sign-in' ? 'Login' : 'Signup'}</h3>
             <fieldset className={`${page}-fieldset`}>
-                {/* username / email section */}
+                {/* username / signUpEmail section */}
                 <input 
                     type={type1} 
                     id={`${page}-${type1}`} 
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)} 
-                    placeholder='Enter your email' 
+                    value={signUpEmail} 
+                    onChange={(e) => setSignUpEmail(e.target.value)} 
+                    placeholder='Enter your signUpEmail' 
                 />
                 {/* password section */}
                 <input 
