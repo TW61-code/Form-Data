@@ -7,9 +7,10 @@ function Form(
         type1, 
         type2, 
         page,
+        isPasswordsMatch,
+        setIsPasswordsMatch,
         setSignUpEmail,
         signUpEmail,
-        confirmPasswordPlaceholder,
         setNewPassword,
         newPassword,
         setConfirmationPassword,
@@ -17,15 +18,25 @@ function Form(
         onHandleSubmitForm,
     }) {
 
+        function handlePasswordChange(e) {
+            setNewPassword(e.target.value);
+            setIsPasswordsMatch(true);
+        }
+
+        function handleConfirmPasswordChange(e) {
+            setConfirmationPassword(e.target.value);
+            setIsPasswordsMatch(true);
+        }
+
     //consitional rendering, dependant on the value of the 'page' prop.
     const signUpPasswordPlaceholder = page === 'sign-up' ? 'Create a password' : 'Enter your pasword';
-    const signUpConfirmPlaceholder = page === 'sign-up' && confirmPasswordPlaceholder;
     const signUpPasswordInput = <input 
                                     type={type2} 
                                     id={`${page}-${type2}-check`} 
                                     value={confirmationPassword} 
-                                    onChange={(e) => setConfirmationPassword(e.target.value)} 
-                                    placeholder={signUpConfirmPlaceholder} />;
+                                    onChange={handleConfirmPasswordChange} 
+                                    placeholder='Confirm password'
+                                />;
     const buttonText = page === 'sign-in' ? 'Login' : 'Signup';
     const footerText = page === 'sign-in' ? "Don't have an account?" : 'Already have an account?';
     const footerType = page === 'sign-in' ? 'Signup' : 'Login';
@@ -49,10 +60,11 @@ function Form(
                     type={type2} 
                     id={`${page}-${type2}`} 
                     value={newPassword} 
-                    onChange={(e) => setNewPassword(e.target.value)} 
+                    onChange={handlePasswordChange} 
                     placeholder={signUpPasswordPlaceholder}
                 />
                 {page === 'sign-up' && signUpPasswordInput}
+                {!isPasswordsMatch && <p>Passwords do not match</p>}
                 {page === 'sign-in' && <p className='forgot-password'><a>Forgot password?</a></p>}
                 <Button page={page} type={buttonText}/>
             </fieldset>

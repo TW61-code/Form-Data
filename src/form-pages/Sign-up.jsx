@@ -7,6 +7,7 @@ function SignUp({page , errors, setErrors}) {
   const [signUpEmail, setSignUpEmail] = useState('');  
   const [newPassword, setNewPassword] = useState('');
   const [confirmationPassword, setConfirmationPassword] = useState('');
+  const [isPasswordsMatch, setIsPasswordsMatch] = useState(true);
 
   let signUpData = {};
 
@@ -30,12 +31,10 @@ function SignUp({page , errors, setErrors}) {
             console.log(await response.json());
 
           } else {
-            alert('Passwords do not match');
 
-            setErrors({...errors, noMatch: "Passwords do not match"});
+            setIsPasswordsMatch(false);
+
           }
-
-          console.log(errors.noMatch)
 
         setSignUpEmail('');
         setNewPassword('');
@@ -47,7 +46,9 @@ function SignUp({page , errors, setErrors}) {
         <Form 
             page={page}
             type1='text' 
-            type2='password'   
+            type2='password' 
+            isPasswordsMatch={isPasswordsMatch}
+            setIsPasswordsMatch={setIsPasswordsMatch}
             setSignUpEmail={setSignUpEmail} 
             signUpEmail={signUpEmail}       
             setNewPassword={setNewPassword}
