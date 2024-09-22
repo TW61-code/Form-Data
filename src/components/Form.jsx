@@ -6,7 +6,10 @@ function Form(
     {
         type1, 
         type2, 
-        page, 
+        page,
+        setEmail,
+        email,
+        onHandleSubmitForm,
     }) {
 
     //consitional rendering, dependant on the value of the 'page' prop.
@@ -21,11 +24,17 @@ function Form(
     //TODO: create a conditional that checks the name of page.
     //render the form depending on the value of the page prop.
     return (
-        <form className={`${page}-form`}>
+        <form className={`${page}-form`} onSubmit={onHandleSubmitForm}>
             <h3 className='form-header'>{page === 'sign-in' ? 'Login' : 'Signup'}</h3>
             <fieldset className={`${page}-fieldset`}>
                 {/* username / email section */}
-                <input type={type1} id={`${page}-${type1}`} placeholder='Enter your email' />
+                <input 
+                    type={type1} 
+                    id={`${page}-${type1}`} 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    placeholder='Enter your email' 
+                />
                 {/* password section */}
                 <input type={type2} id={`${page}-${type2}`} placeholder={signUpPasswordPlaceholder}/>
                 {page === 'sign-up' && signUpPasswordInput}
