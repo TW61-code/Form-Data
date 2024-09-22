@@ -4,24 +4,33 @@ import './Form.css';
 
 function SignUp({page, email, setEmail, setConfirmationPassword, setNewPassword, newPassword, confirmationPassword}) {
 
-    const data = {
-        password: newPassword,
-        confirmationPassword: confirmationPassword,
-        email: email,
+    let confirmPasswordPlaceholder = 'Confirm your password';
+
+    const matchingPassword = confirmationPassword === newPassword;
+
+    const signUpData = {
+        password: matchingPassword ? newPassword : undefined,
+        email: matchingPassword ? email : undefined,
     }
 
     async function handleSubmitForm(e) {
         e.preventDefault();
+
+        if (!matchingPassword) {
+            confirmPasswordPlaceholder = 'Passwords do not match';
+        }
 
         const response = await fetch('http://localhost:3000/contacts', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(signUpData),
         });
 
-        console.log(await response.json());
+        setEmail('');
+        setNewPassword('');
+        setConfirmationPassword('');
     }
 
 
@@ -32,9 +41,11 @@ function SignUp({page, email, setEmail, setConfirmationPassword, setNewPassword,
             type2='password'   
             setEmail={setEmail} 
             email={email}       
-            passwordCheckPlaceholder='Confirm your password'
+            confirmPasswordPlaceholder={confirmPasswordPlaceholder}
             setNewPassword={setNewPassword}
+            newPassword={newPassword}
             setConfirmationPassword={setConfirmationPassword}
+            confirmationPassword={confirmationPassword}
             onHandleSubmitForm={handleSubmitForm}
         />
     );

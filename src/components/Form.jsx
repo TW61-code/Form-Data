@@ -9,17 +9,26 @@ function Form(
         page,
         setEmail,
         email,
+        confirmPasswordPlaceholder,
+        setNewPassword,
+        newPassword,
+        setConfirmationPassword,
+        confirmationPassword,
         onHandleSubmitForm,
     }) {
 
     //consitional rendering, dependant on the value of the 'page' prop.
     const signUpPasswordPlaceholder = page === 'sign-up' ? 'Create a password' : 'Enter your pasword';
-    const signUpPasswordMatchLabel = page === 'sign-up' ? 'Confirm your password' : undefined;
-    const signUpPasswordInput = <input type={type2} id={`${page}-${type2}-check`} placeholder={signUpPasswordMatchLabel} />;
+    const signUpConfirmPlaceholder = page === 'sign-up' && confirmPasswordPlaceholder;
+    const signUpPasswordInput = <input 
+                                    type={type2} 
+                                    id={`${page}-${type2}-check`} 
+                                    value={confirmationPassword} 
+                                    onChange={(e) => setConfirmationPassword(e.target.value)} 
+                                    placeholder={signUpConfirmPlaceholder} />;
     const buttonText = page === 'sign-in' ? 'Login' : 'Signup';
     const footerText = page === 'sign-in' ? "Don't have an account?" : 'Already have an account?';
     const footerType = page === 'sign-in' ? 'Signup' : 'Login';
-    
 
     //TODO: create a conditional that checks the name of page.
     //render the form depending on the value of the page prop.
@@ -36,7 +45,13 @@ function Form(
                     placeholder='Enter your email' 
                 />
                 {/* password section */}
-                <input type={type2} id={`${page}-${type2}`} placeholder={signUpPasswordPlaceholder}/>
+                <input 
+                    type={type2} 
+                    id={`${page}-${type2}`} 
+                    value={newPassword} 
+                    onChange={(e) => setNewPassword(e.target.value)} 
+                    placeholder={signUpPasswordPlaceholder}
+                />
                 {page === 'sign-up' && signUpPasswordInput}
                 {page === 'sign-in' && <p className='forgot-password'><a>Forgot password?</a></p>}
                 <Button page={page} type={buttonText}/>
