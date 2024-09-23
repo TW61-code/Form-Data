@@ -26,7 +26,6 @@ function SignUp({page, setUserData, userData, setUserCount, userCount}) {
             });
 
             setFormData({signUpEmail: '', newPassword: '', confirmationPassword: '', isPasswordsMatch: true});
-            console.log('this is the formData ', formData);
             setUserCount(count => count + 1)
           } else {
             //Render non-match text.

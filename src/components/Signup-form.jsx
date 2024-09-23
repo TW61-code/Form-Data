@@ -1,6 +1,4 @@
 import React from 'react';
-import Button from './Form-submit-button.jsx';
-import FormFooter from './Form-footer.jsx';
 
 function SignupForm(
     {

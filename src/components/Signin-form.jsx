@@ -2,15 +2,15 @@ import React from 'react';
 
 function signinForm(
     {
-        email,
-        password,
-        setEmail,
-        setPassword,
+        formData,
+        setFormData,
         onHandleSubmitForm,
-        userData
     }) {
 
-        
+        function handleValueChange(e) {
+            const {name, value} = e.target;
+            setFormData((prev) => ({...prev, [name]: value}));
+        }
 
         return (
         <form className='signin-form' onSubmit={onHandleSubmitForm}>
@@ -20,16 +20,18 @@ function signinForm(
                 <input 
                     type='text' 
                     id='signin-text'
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)} 
+                    name='email'
+                    value={formData.email} 
+                    onChange={handleValueChange} 
                     placeholder='Enter your email' 
                 />
                 {/* password section */}
                 <input 
                     type='password'
                     id='signin-password'
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
+                    name='password'
+                    value={formData.password} 
+                    onChange={handleValueChange} 
                     placeholder='Enter your password'
                 />
                 <button type='submit'>Sign in</button>

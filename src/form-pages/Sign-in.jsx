@@ -4,9 +4,7 @@ import './Form.css';
 
 function SignIn({page, userData, setUserData, userCount}) {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
+    const [formData, setFormData] = useState({email: '', password: ''});
 
     useEffect(() => {
         getData();
@@ -22,16 +20,20 @@ function SignIn({page, userData, setUserData, userCount}) {
     function handleSubmitForm(e) {
         e.preventDefault();
 
-        
+        for (let user of userData) {
+            if (user.email === formData.email && user.password === formData.password) {
+                alert(user.email + ' is registered');
+            } else {
+                console.log('no match');
+            }
+        }
     }
 
     return (
         <SigninForm 
             page={page}
-            email={email}
-            password={password}
-            setEmail={setEmail}
-            setPassword={setPassword}
+            formData={formData}
+            setFormData={setFormData}
             onHandleSubmitForm={handleSubmitForm}
             userData={userData}
         />
