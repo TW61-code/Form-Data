@@ -1,4 +1,4 @@
-// import { useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import SignInPage from './form-pages/Sign-in.jsx';
 import SignUpPage from './form-pages/Sign-up.jsx';
@@ -6,10 +6,12 @@ import SignUpPage from './form-pages/Sign-up.jsx';
 
 function App() {
 
+  const [userData, setUserData] = useState();
+
   return (
     <>
-      {/* <SignInPage page='sign-in'/> */}
-      <SignUpPage page='sign-up' />
+      <SignInPage page='sign-in' userData={userData} setUserData={setUserData} />
+      {/* <SignUpPage page='sign-up' setUserData={setUserData} userData={userData} /> */}
     </>
   )
 }

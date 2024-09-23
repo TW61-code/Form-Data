@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import Form from '../components/Form.jsx';
+import SignupForm from '../components/Signup-form.jsx';
 import './Form.css';
 
-function SignUp({page}) {
+function SignUp({page, setUserData, userData}) {
 
   const [signUpEmail, setSignUpEmail] = useState('');  
   const [newPassword, setNewPassword] = useState('');
@@ -18,10 +18,10 @@ function SignUp({page}) {
 
             const signUpData = {
                 password: newPassword,
-                signUpEmail: signUpEmail,
+                email: signUpEmail,
             }
 
-            const response = await fetch('http://localhost:3000/contacts', {
+            const request = await fetch('http://localhost:3000/contacts', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -29,12 +29,9 @@ function SignUp({page}) {
                 body: JSON.stringify(signUpData),
             });
 
-            console.log(await response.json());
-
             setSignUpEmail('');
             setNewPassword('');
             setConfirmationPassword('');
-
           } else {
             //Render non-match text.
             setIsPasswordsMatch(false);
@@ -43,10 +40,8 @@ function SignUp({page}) {
 
 
     return (
-        <Form 
+        <SignupForm 
             page={page}
-            type1='text' 
-            type2='password' 
             isPasswordsMatch={isPasswordsMatch}
             setIsPasswordsMatch={setIsPasswordsMatch}
             setSignUpEmail={setSignUpEmail} 

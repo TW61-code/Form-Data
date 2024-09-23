@@ -1,13 +1,30 @@
-import React from 'react';
-import Form from '../components/Form.jsx';
+import React, {useState} from 'react';
+import SigninForm from '../components/Signin-form.jsx';
 import './Form.css';
 
-function SignIn({page}) {
+function SignIn({page, userData, setUserData}) {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    async function handleSubmitForm(e) {
+        e.preventDefault();
+
+        const response = await fetch('http://localhost:3000/contacts');
+        const data = await response.json();
+        
+        setUserData(data);
+    }
+
     return (
-        <Form 
+        <SigninForm 
             page={page}
-            type1='text' 
-            type2='password' 
+            email={email}
+            password={password}
+            setEmail={setEmail}
+            setPassword={setPassword}
+            onHandleSubmitForm={handleSubmitForm}
+            userData={userData}
         />
     );
 }
