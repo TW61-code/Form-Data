@@ -2,18 +2,26 @@ import React, {useState} from 'react';
 import SigninForm from '../components/Signin-form.jsx';
 import './Form.css';
 
-function SignIn({page, userData, setUserData}) {
+function SignIn({page, userData, setUserData, userCount}) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    async function handleSubmitForm(e) {
-        e.preventDefault();
+    useEffect(() => {
+        getData();
+    }, [userCount]);
 
+    async function getData() {
         const response = await fetch('http://localhost:3000/contacts');
         const data = await response.json();
-        
         setUserData(data);
+        console.log(data);
+    }
+
+    function handleSubmitForm(e) {
+        e.preventDefault();
+
+        
     }
 
     return (

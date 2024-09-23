@@ -7,11 +7,12 @@ import SignUpPage from './form-pages/Sign-up.jsx';
 function App() {
 
   const [userData, setUserData] = useState();
+  const [userCount, setUserCount] = useState(0);
 
   return (
     <>
-      <SignInPage page='sign-in' userData={userData} setUserData={setUserData} />
-      {/* <SignUpPage page='sign-up' setUserData={setUserData} userData={userData} /> */}
+      <SignInPage page='sign-in' userData={userData} setUserData={setUserData} userCount={userCount} />
+      <SignUpPage page='sign-up' setUserData={setUserData} userData={userData} userCount={userCount} setUserCount={setUserCount} />
     </>
   )
 }

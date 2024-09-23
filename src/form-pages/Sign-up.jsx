@@ -2,12 +2,11 @@ import React, {useState} from 'react';
 import SignupForm from '../components/Signup-form.jsx';
 import './Form.css';
 
-function SignUp({page, setUserData, userData}) {
+function SignUp({page, setUserData, userData, setUserCount, userCount}) {
 
   const [signUpEmail, setSignUpEmail] = useState('');  
   const [newPassword, setNewPassword] = useState('');
   const [confirmationPassword, setConfirmationPassword] = useState('');
-  //Display passwords don't match warning to user if false.
   const [isPasswordsMatch, setIsPasswordsMatch] = useState(true);
 
     async function handleSubmitForm(e) {
@@ -32,6 +31,7 @@ function SignUp({page, setUserData, userData}) {
             setSignUpEmail('');
             setNewPassword('');
             setConfirmationPassword('');
+            setUserCount(userCount++)
           } else {
             //Render non-match text.
             setIsPasswordsMatch(false);
