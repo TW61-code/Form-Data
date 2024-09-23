@@ -2,20 +2,21 @@ import React, {useState} from 'react';
 import Form from '../components/Form.jsx';
 import './Form.css';
 
-function SignUp({page , errors, setErrors}) {
+function SignUp({page}) {
 
   const [signUpEmail, setSignUpEmail] = useState('');  
   const [newPassword, setNewPassword] = useState('');
   const [confirmationPassword, setConfirmationPassword] = useState('');
+  //Display passwords don't match warning to user if false.
   const [isPasswordsMatch, setIsPasswordsMatch] = useState(true);
-
-  let signUpData = {};
 
     async function handleSubmitForm(e) {
         e.preventDefault();
 
+        //Only post data if form is correct.
         if (newPassword === confirmationPassword) {
-            signUpData = {
+
+            const signUpData = {
                 password: newPassword,
                 signUpEmail: signUpEmail,
             }
@@ -30,15 +31,14 @@ function SignUp({page , errors, setErrors}) {
 
             console.log(await response.json());
 
+            setSignUpEmail('');
+            setNewPassword('');
+            setConfirmationPassword('');
+
           } else {
-
+            //Render non-match text.
             setIsPasswordsMatch(false);
-
           }
-
-        setSignUpEmail('');
-        setNewPassword('');
-        setConfirmationPassword('');
     }
 
 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import './App.css'
 import SignInPage from './form-pages/Sign-in.jsx';
 import SignUpPage from './form-pages/Sign-up.jsx';
@@ -6,12 +6,10 @@ import SignUpPage from './form-pages/Sign-up.jsx';
 
 function App() {
 
-  const [errors, setErrors] = useState({});
-
   return (
     <>
       {/* <SignInPage page='sign-in'/> */}
-      <SignUpPage page='sign-up' setErrors={setErrors} errors={errors} />
+      <SignUpPage page='sign-up' />
     </>
   )
 }

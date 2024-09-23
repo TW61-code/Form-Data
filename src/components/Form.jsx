@@ -20,6 +20,7 @@ function Form(
 
         function handlePasswordChange(e) {
             setNewPassword(e.target.value);
+            //Remove the non-matching password message
             setIsPasswordsMatch(true);
         }
 
@@ -28,7 +29,7 @@ function Form(
             setIsPasswordsMatch(true);
         }
 
-    //consitional rendering, dependant on the value of the 'page' prop.
+    //Render texts based on the current page the user is on.
     const signUpPasswordPlaceholder = page === 'sign-up' ? 'Create a password' : 'Enter your pasword';
     const signUpPasswordInput = <input 
                                     type={type2} 
@@ -66,7 +67,7 @@ function Form(
                 {page === 'sign-up' && signUpPasswordInput}
                 {!isPasswordsMatch && <p>Passwords do not match</p>}
                 {page === 'sign-in' && <p className='forgot-password'><a>Forgot password?</a></p>}
-                <Button page={page} type={buttonText}/>
+                <Button page={page} buttonText={buttonText}/>
             </fieldset>
             <FormFooter 
                 text={footerText}
