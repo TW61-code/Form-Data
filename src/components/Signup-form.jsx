@@ -4,26 +4,15 @@ import FormFooter from './Form-footer.jsx';
 
 function SignupForm(
     {
-        isPasswordsMatch,
-        setIsPasswordsMatch,
-        setSignUpEmail,
-        signUpEmail,
-        setNewPassword,
-        newPassword,
-        setConfirmationPassword,
-        confirmationPassword,
+        setFormData,
+        formData,
         onHandleSubmitForm,
     }) {
 
-        function handlePasswordChange(e) {
-            setNewPassword(e.target.value);
-            //Remove the non-matching password message
-            setIsPasswordsMatch(true);
-        }
-
-        function handleConfirmPasswordChange(e) {
-            setConfirmationPassword(e.target.value);
-            setIsPasswordsMatch(true);
+        function handleValueChange(e) {
+            const {name, value} = e.target;
+            setFormData((prev) => ({...prev, [name]: value, isPasswordsMatch: true}));
+            
         }
 
         return (
@@ -34,26 +23,29 @@ function SignupForm(
                 <input 
                     type='text' 
                     id='signup-text'
-                    value={signUpEmail} 
-                    onChange={(e) => setSignUpEmail(e.target.value)} 
+                    name='signUpEmail'
+                    value={formData.signUpEmail} 
+                    onChange={handleValueChange} 
                     placeholder='Enter your email' 
                 />
                 {/* password section */}
                 <input 
                     type='password'
                     id='signup-password'
-                    value={newPassword} 
-                    onChange={handlePasswordChange} 
+                    name='newPassword'
+                    value={formData.newPassword} 
+                    onChange={handleValueChange} 
                     placeholder='Create a password'
                 />
                 <input 
                     type='password'
                     id='signup-password-check'
-                    value={confirmationPassword} 
-                    onChange={handleConfirmPasswordChange} 
+                    name='confirmationPassword'
+                    value={formData.confirmationPassword} 
+                    onChange={handleValueChange} 
                     placeholder='Confirm password'
                 />
-                {!isPasswordsMatch && <p>Passwords do not match</p>}
+                {!formData.isPasswordsMatch && <p>Passwords do not match</p>}
                 <button type='submit'>Sign up</button>
             </fieldset>
             <p className='form-footer'>

@@ -4,20 +4,17 @@ import './Form.css';
 
 function SignUp({page, setUserData, userData, setUserCount, userCount}) {
 
-  const [signUpEmail, setSignUpEmail] = useState('');  
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmationPassword, setConfirmationPassword] = useState('');
-  const [isPasswordsMatch, setIsPasswordsMatch] = useState(true);
+    const [formData, setFormData] = useState({signUpEmail: '', newPassword: '', confirmationPassword: '', isPasswordsMatch: true})
 
     async function handleSubmitForm(e) {
         e.preventDefault();
 
         //Only post data if form is correct.
-        if (newPassword === confirmationPassword) {
+        if (formData.newPassword === formData.confirmationPassword) {
 
             const signUpData = {
-                password: newPassword,
-                email: signUpEmail,
+                password: formData.newPassword,
+                email: formData.signUpEmail,
             }
 
             const request = await fetch('http://localhost:3000/contacts', {
@@ -28,13 +25,12 @@ function SignUp({page, setUserData, userData, setUserCount, userCount}) {
                 body: JSON.stringify(signUpData),
             });
 
-            setSignUpEmail('');
-            setNewPassword('');
-            setConfirmationPassword('');
-            setUserCount(userCount++)
+            setFormData({signUpEmail: '', newPassword: '', confirmationPassword: '', isPasswordsMatch: true});
+            console.log('this is the formData ', formData);
+            setUserCount(count => count + 1)
           } else {
             //Render non-match text.
-            setIsPasswordsMatch(false);
+            setFormData((prev) => ({...prev, isPasswordsMatch: false}));
           }
     }
 
@@ -42,14 +38,8 @@ function SignUp({page, setUserData, userData, setUserCount, userCount}) {
     return (
         <SignupForm 
             page={page}
-            isPasswordsMatch={isPasswordsMatch}
-            setIsPasswordsMatch={setIsPasswordsMatch}
-            setSignUpEmail={setSignUpEmail} 
-            signUpEmail={signUpEmail}       
-            setNewPassword={setNewPassword}
-            newPassword={newPassword}
-            setConfirmationPassword={setConfirmationPassword}
-            confirmationPassword={confirmationPassword}
+            setFormData={setFormData}
+            formData={formData}
             onHandleSubmitForm={handleSubmitForm}
         />
     );
